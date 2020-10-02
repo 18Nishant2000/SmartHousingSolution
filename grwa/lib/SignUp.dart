@@ -204,13 +204,13 @@ class _SignUpState extends State<SignUp> {
                         if (res == 1) {
                           //snackbar
                           Future.delayed(Duration(seconds: 5),
-                              () => Navigator.pushNamed(context, '/login'));
+                              () => Navigator.pushNamed(context, '/decision'));
                         } else {
                           var res = register();
                           if (res == 0) {
                             //snackbar
                             Future.delayed(Duration(seconds: 5),
-                                () => Navigator.pushNamed(context, '/login'));
+                                () => Navigator.pushNamed(context, '/decision'));
                           } else {
                             //snackbar
 

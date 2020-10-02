@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/' : (context) => Decision(),
-        '/login' : (context) => d2.Decision(),
+        '/decision' : (context) => d2.Decision(),
         '/signup' : (context) => SignUp(),
-        '/l' : (context) => Login(),
+        '/login' : (context) => Login(),
       },
     );
   }
@@ -42,7 +42,7 @@ class Decision extends StatelessWidget {
                 ),
                 SizedBox(height: 30.0,),
                 RaisedButton(
-                  onPressed: ()=> Navigator.pushNamed(context, '/login'),
+                  onPressed: ()=> Navigator.pushNamed(context, '/decision'),
                   child: Center(
                     child: Text('Login'),
                   ),

@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'back.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class _LoginState extends State<Login> {
   String mobno;
   @override
   Widget build(BuildContext context) {
+    var args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       backgroundColor: Colors.grey[900],
       body: Container(
@@ -47,7 +50,13 @@ class _LoginState extends State<Login> {
               splashColor: Colors.blue,
               color: Colors.amber,
               onPressed: () async {
-                print('OTP REQUESTED');
+                await Firebase.initializeApp();
+                var res = check(args, mobno,'login');
+                if(res == 0){
+                  print('OTP REQUESTED');
+                }else{
+                  print('Not an Admin');
+                }
               },
               child: Column(
                 mainAxisSize: MainAxisSize.min,

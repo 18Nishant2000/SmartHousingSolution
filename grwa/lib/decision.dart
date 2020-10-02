@@ -13,7 +13,7 @@ class Decision extends StatelessWidget {
               elevation: 10.0,
               splashColor: Colors.blue,
               color: Colors.amber,
-              onPressed: () => Navigator.pushNamed(context, '/l'),
+              onPressed: () => Navigator.pushNamed(context, '/login', arguments: 'admin'),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -39,7 +39,7 @@ class Decision extends StatelessWidget {
               elevation: 10.0,
               splashColor: Colors.blue,
               color: Colors.amber,
-              onPressed: () => Navigator.pushNamed(context, '/l'),
+              onPressed: () => Navigator.pushNamed(context, '/login', arguments: 'user'),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
