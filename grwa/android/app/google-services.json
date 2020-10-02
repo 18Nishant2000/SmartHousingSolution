@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "705584400025",
+    "firebase_url": "https://resiwell-22dfb.firebaseio.com",
+    "project_id": "resiwell-22dfb",
+    "storage_bucket": "resiwell-22dfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705584400025:android:9c01fec976478143545a08",
+        "android_client_info": {
+          "package_name": "com.example.grwa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705584400025-1426osib1t0j903n6in9stlhk20i7roc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfPeldniEvQEVkPqVo-FpPEeIIoY6rkmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705584400025-1426osib1t0j903n6in9stlhk20i7roc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

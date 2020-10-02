@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>705584400025-b3vgurnb2ra42uu61l02f63i4hefpmkk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.705584400025-b3vgurnb2ra42uu61l02f63i4hefpmkk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC_ni9elPbPyACtTjZ71ZC1vGabUKeBZUE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>705584400025</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.grwa</string>
+	<key>PROJECT_ID</key>
+	<string>resiwell-22dfb</string>
+	<key>STORAGE_BUCKET</key>
+	<string>resiwell-22dfb.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:705584400025:ios:2c8facd6e373227a545a08</string>
+	<key>DATABASE_URL</key>
+	<string>https://resiwell-22dfb.firebaseio.com</string>
+</dict>
+</plist>
