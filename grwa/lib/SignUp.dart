@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:grwa/components.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key key}) : super(key: key);
@@ -21,11 +22,11 @@ class _SignUpState extends State<SignUp> {
         .then((value) => value.docs.forEach((element) {
           //print(element.id.toString());
               if (element.id == hno) {
-                return 1;
+                return 0;
               }
             }));
             //if(f==1) return 1;
-    return 0;
+    return 1;
   }
 
   register() {
@@ -201,18 +202,21 @@ class _SignUpState extends State<SignUp> {
                       if (_formkey.currentState.validate()) {
                         await Firebase.initializeApp();
                         var res = check();
-                        if (res == 1) {
-                          //snackbar
+                        if (res == 0) {
+                          var mysnack = snack('Already Registered!');
+                          Scaffold.of(context).showSnackBar(mysnack);
                           Future.delayed(Duration(seconds: 5),
                               () => Navigator.pushNamed(context, '/decision'));
                         } else {
                           var res = register();
                           if (res == 0) {
-                            //snackbar
+                            var mysnack = snack('Registered Successfully!');
+                            Scaffold.of(context).showSnackBar(mysnack);
                             Future.delayed(Duration(seconds: 5),
                                 () => Navigator.pushNamed(context, '/decision'));
                           } else {
-                            //snackbar
+                            var mysnack = snack('Something went wrong!!!\nPlease try again');
+                            Scaffold.of(context).showSnackBar(mysnack);
 
                           }
                         }
