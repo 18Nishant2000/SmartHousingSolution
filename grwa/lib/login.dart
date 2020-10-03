@@ -11,16 +11,19 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _formkey = GlobalKey<FormState>();
+  final _scaffoldkey = GlobalKey<ScaffoldState>();
   String mobno, hno;
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
+      key: _scaffoldkey,
       backgroundColor: Colors.grey[900],
       body: Container(
         margin: EdgeInsets.fromLTRB(40.0, 0, 40.0, 0),
         child: Center(
           child: Form(
+            key: _formkey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -80,13 +83,13 @@ class _LoginState extends State<Login> {
                   color: Colors.amber,
                   onPressed: () async {
                     if (_formkey.currentState.validate()) {
-                      Future.delayed(Duration(seconds: 3), () => enterdialog(context));
+                      //Future.delayed(Duration(seconds: 3), () => enterdialog(context));
                       await Firebase.initializeApp();
-                      var res = check(args.toString(), hno);
-                      if (res == 0) {
+                      var res = await check(args.toString(), hno);
+                      if (res == true) {
                         print('USER EXISTS');
-                        FirebaseAuth.instance.verifyPhoneNumber(
-                            timeout: Duration(seconds: 60),
+                        await FirebaseAuth.instance.verifyPhoneNumber(
+                            timeout: Duration(seconds: 30),
                             phoneNumber: '+91' + mobno,
                             verificationCompleted:
                                 (PhoneAuthCredential credential) async {
@@ -99,12 +102,13 @@ class _LoginState extends State<Login> {
                                     'The provided phone number is not valid.');
                                 String text =
                                     'The provided phone number is not valid.';
-                                Scaffold.of(context).showSnackBar(snack(text));
+                                _scaffoldkey.currentState.showSnackBar(snack(text));
+                                //Scaffold.of(context).showSnackBar(snack(text));
                               }
                             },
                             codeSent:
                                 (String verificationId, int resendToken) async {
-                              String code = enterdialog(context);
+                              String code = await enterdialog(context);
                               PhoneAuthCredential phoneAuthCredential =
                                   PhoneAuthProvider.credential(
                                       verificationId: verificationId,
@@ -114,7 +118,7 @@ class _LoginState extends State<Login> {
                             },
                             codeAutoRetrievalTimeout:
                                 (String verificationId) async {
-                              String code = enterdialog(context);
+                              String code = await enterdialog(context);
                               PhoneAuthCredential phoneAuthCredential =
                                   PhoneAuthProvider.credential(
                                       verificationId: verificationId,
@@ -125,7 +129,8 @@ class _LoginState extends State<Login> {
                         print('OTP REQUESTED');
                       } else {
                         var mysnack = snack('You are not an ${args.toString()}!');
-                        Scaffold.of(context).showSnackBar(mysnack);
+                        _scaffoldkey.currentState.showSnackBar(mysnack);
+                        //Scaffold.of(context).showSnackBar(mysnack);
                         print('Not an ${args.toString()}!');
                       }
                     }
