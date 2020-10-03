@@ -10,6 +10,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _formkey = GlobalKey<FormState>();
   String mobno, hno;
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ class _LoginState extends State<Login> {
                   height: 20.0,
                 ),
                 TextFormField(
+                  validator: (value) => value.isEmpty ? 'Required' : null,
                   style: TextStyle(
                     color: Colors.grey[350],
                   ),
@@ -52,6 +54,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 TextFormField(
+                  validator: (value) => value.isEmpty ? 'Required' : null,
                   style: TextStyle(
                     color: Colors.grey[350],
                   ),
@@ -76,50 +79,55 @@ class _LoginState extends State<Login> {
                   splashColor: Colors.blue,
                   color: Colors.amber,
                   onPressed: () async {
-                    enterdialog(context);
-                    await Firebase.initializeApp();
-                    var res = check(args.toString(), hno);
-                    if (res == 0) {
-                      FirebaseAuth.instance.verifyPhoneNumber(
-                          timeout: Duration(seconds: 60),
-                          phoneNumber: mobno,
-                          verificationCompleted:
-                              (PhoneAuthCredential credential) async {
-                            await FirebaseAuth.instance
-                                .signInWithCredential(credential);
-                          },
-                          verificationFailed: (FirebaseAuthException e) {
-                            if (e.code == 'invalid-phone-number') {
-                              print('The provided phone number is not valid.');
-                              String text =
-                                  'The provided phone number is not valid.';
-                              Scaffold.of(context).showSnackBar(snack(text));
-                            }
-                          },
-                          codeSent:
-                              (String verificationId, int resendToken) async {
-                            String code = enterdialog(context);
-                            PhoneAuthCredential phoneAuthCredential =
-                                PhoneAuthProvider.credential(
-                                    verificationId: verificationId,
-                                    smsCode: code);
-                            await FirebaseAuth.instance
-                                .signInWithCredential(phoneAuthCredential);
-                          },
-                          codeAutoRetrievalTimeout:
-                              (String verificationId) async {
-                            String code = enterdialog(context);
-                            PhoneAuthCredential phoneAuthCredential =
-                                PhoneAuthProvider.credential(
-                                    verificationId: verificationId,
-                                    smsCode: code);
-                            await FirebaseAuth.instance
-                                .signInWithCredential(phoneAuthCredential);
-                          });
-                      print('OTP REQUESTED');
-                    } else {
-                      enterdialog(context);
-                      print('Not an Admin');
+                    if (_formkey.currentState.validate()) {
+                      Future.delayed(Duration(seconds: 3), () => enterdialog(context));
+                      await Firebase.initializeApp();
+                      var res = check(args.toString(), hno);
+                      if (res == 0) {
+                        print('USER EXISTS');
+                        FirebaseAuth.instance.verifyPhoneNumber(
+                            timeout: Duration(seconds: 60),
+                            phoneNumber: '+91' + mobno,
+                            verificationCompleted:
+                                (PhoneAuthCredential credential) async {
+                              await FirebaseAuth.instance
+                                  .signInWithCredential(credential);
+                            },
+                            verificationFailed: (FirebaseAuthException e) {
+                              if (e.code == 'invalid-phone-number') {
+                                print(
+                                    'The provided phone number is not valid.');
+                                String text =
+                                    'The provided phone number is not valid.';
+                                Scaffold.of(context).showSnackBar(snack(text));
+                              }
+                            },
+                            codeSent:
+                                (String verificationId, int resendToken) async {
+                              String code = enterdialog(context);
+                              PhoneAuthCredential phoneAuthCredential =
+                                  PhoneAuthProvider.credential(
+                                      verificationId: verificationId,
+                                      smsCode: code);
+                              await FirebaseAuth.instance
+                                  .signInWithCredential(phoneAuthCredential);
+                            },
+                            codeAutoRetrievalTimeout:
+                                (String verificationId) async {
+                              String code = enterdialog(context);
+                              PhoneAuthCredential phoneAuthCredential =
+                                  PhoneAuthProvider.credential(
+                                      verificationId: verificationId,
+                                      smsCode: code);
+                              await FirebaseAuth.instance
+                                  .signInWithCredential(phoneAuthCredential);
+                            });
+                        print('OTP REQUESTED');
+                      } else {
+                        var mysnack = snack('You are not an ${args.toString()}!');
+                        Scaffold.of(context).showSnackBar(mysnack);
+                        print('Not an ${args.toString()}!');
+                      }
                     }
                   },
                   child: Column(

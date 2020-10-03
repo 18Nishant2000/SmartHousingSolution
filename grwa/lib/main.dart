@@ -38,7 +38,7 @@ class Decision extends StatelessWidget {
                 Icon(
                   Icons.account_circle,
                   color: Colors.grey[800],
-                  size: 50.0,
+                  size: MediaQuery.of(context).size.height*0.4,
                 ),
                 SizedBox(height: 30.0,),
                 RaisedButton(
