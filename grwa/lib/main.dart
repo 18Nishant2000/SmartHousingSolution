@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'SignUp.dart';
 import 'decision.dart' as d2;
 import 'login.dart';
+import 's1.dart';
+//import './chat/home_screen.dart';
+import './chat/Home.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,12 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/' : (context) => Decision(),
         '/decision' : (context) => d2.Decision(),
         '/signup' : (context) => SignUp(),
         '/login' : (context) => Login(),
+        '/home': (context) => Landing(),
+        '/chat': (context) => Home(),
       },
     );
   }

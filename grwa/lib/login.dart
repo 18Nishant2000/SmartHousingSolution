@@ -95,16 +95,18 @@ class _LoginState extends State<Login> {
                                 (PhoneAuthCredential credential) async {
                               await FirebaseAuth.instance
                                   .signInWithCredential(credential);
+                              Navigator.pushNamed(context, '/home');
                             },
                             verificationFailed: (FirebaseAuthException e) {
+                              String text;
                               if (e.code == 'invalid-phone-number') {
-                                print(
-                                    'The provided phone number is not valid.');
-                                String text =
+                                text =
                                     'The provided phone number is not valid.';
-                                _scaffoldkey.currentState.showSnackBar(snack(text));
-                                //Scaffold.of(context).showSnackBar(snack(text));
+                              } else {
+                                text = 'Wrong OTP entered!!';
                               }
+                              _scaffoldkey.currentState
+                                  .showSnackBar(snack(text));
                             },
                             codeSent:
                                 (String verificationId, int resendToken) async {
@@ -113,8 +115,18 @@ class _LoginState extends State<Login> {
                                   PhoneAuthProvider.credential(
                                       verificationId: verificationId,
                                       smsCode: code);
-                              await FirebaseAuth.instance
-                                  .signInWithCredential(phoneAuthCredential);
+                              if (code == phoneAuthCredential.smsCode) {
+                                await FirebaseAuth.instance
+                                    .signInWithCredential(phoneAuthCredential);
+                                Navigator.pushNamed(context, '/home');
+                              } else {
+                                _scaffoldkey.currentState.showSnackBar(
+                                    snack('Wrong OTP entered!!!'));
+                                Future.delayed(
+                                    Duration(seconds: 5),
+                                    () => Navigator.pushNamed(
+                                        context, '/decision'));
+                              }
                             },
                             codeAutoRetrievalTimeout:
                                 (String verificationId) async {
@@ -123,12 +135,24 @@ class _LoginState extends State<Login> {
                                   PhoneAuthProvider.credential(
                                       verificationId: verificationId,
                                       smsCode: code);
-                              await FirebaseAuth.instance
-                                  .signInWithCredential(phoneAuthCredential);
+                               if (code == phoneAuthCredential.smsCode) {
+                                await FirebaseAuth.instance
+                                    .signInWithCredential(phoneAuthCredential);
+                                Navigator.pushNamed(context, '/home');
+                              } else {
+                                _scaffoldkey.currentState.showSnackBar(
+                                    snack('Wrong OTP entered!!!'));
+                                Future.delayed(
+                                    Duration(seconds: 5),
+                                    () => Navigator.pushNamed(
+                                        context, '/decision'));
+                              }
                             });
+                        print(res);
                         print('OTP REQUESTED');
                       } else {
-                        var mysnack = snack('You are not an ${args.toString()}!');
+                        var mysnack =
+                            snack('You are not an ${args.toString()}!');
                         _scaffoldkey.currentState.showSnackBar(mysnack);
                         //Scaffold.of(context).showSnackBar(mysnack);
                         print('Not an ${args.toString()}!');
