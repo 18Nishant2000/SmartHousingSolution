@@ -3,8 +3,8 @@ import 'SignUp.dart';
 import 'decision.dart' as d2;
 import 'login.dart';
 import 's1.dart';
-//import './chat/home_screen.dart';
 import './chat/Home.dart';
+import 'splash.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/' : (context) => Decision(),
+        '/' : (context) => Splash(),
+        '/lsdecision': (context) => Decision(),
         '/decision' : (context) => d2.Decision(),
         '/signup' : (context) => SignUp(),
         '/login' : (context) => Login(),

@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'back.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'components.dart';
 
 class Login extends StatefulWidget {
